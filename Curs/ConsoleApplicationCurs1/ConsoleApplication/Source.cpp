@@ -5,6 +5,7 @@ using namespace std;
 
 void interschimbareValori(int a, int b);
 void interschimbareValori2(int* pa, int* pb);
+void interschimbareValori3(int& a, int& b);
 
 void main() {
 	int A;
@@ -42,6 +43,12 @@ void main() {
 
 	std::cout << "\n vb1 = " << vb1;
 	cout << endl << " vb2 = " << vb2;
+
+	interschimbareValori3(vb1, vb2);
+
+	cout << endl << "Dupa referinte";
+	std::cout << "\n vb1 = " << vb1;
+	cout << endl << " vb2 = " << vb2;
 }
 
 void interschimbareValori(int a, int b) {
@@ -54,4 +61,10 @@ void interschimbareValori2(int* pa, int* pb) {
 	int temp = *pa;
 	*pa = *pb;
 	*pb = temp;
+}
+
+void interschimbareValori3(int& a, int& b) {
+	int temp = a;
+	a = b;
+	b = temp;
 }

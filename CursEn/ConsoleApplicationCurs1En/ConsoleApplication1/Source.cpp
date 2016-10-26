@@ -4,6 +4,7 @@ using namespace std;
 
 void interchangeValues(int a, int b);
 void interchangeValues2(int* pa, int* pb);
+void interchangeValues3(int& a, int& b);
 
 void main() {
 	int A;
@@ -25,6 +26,13 @@ void main() {
 
 	std::cout << "\n vb1 = " << vb1;
 	cout << endl << " vb2  = " << vb2;
+
+	interchangeValues3(vb1, vb2);
+
+	cout << endl << "After using references";
+
+	std::cout << "\n vb1 = " << vb1;
+	cout << endl << " vb2  = " << vb2;
 }
 
 //method for interchanging
@@ -34,9 +42,14 @@ void interchangeValues(int a, int b) {
 	a = temp;
 }
 
-
 void interchangeValues2(int* pa, int* pb) {
 	int temp = *pb;
 	*pb = *pa;
 	*pa = temp;
+}
+
+void interchangeValues3(int& a, int& b) {
+	int temp = b;
+	b = a;
+	a = temp;
 }
