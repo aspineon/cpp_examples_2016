@@ -21,7 +21,11 @@ public:
 private:
 	int* note;
 	int nrNote;
-	float inaltime;
+	int inaltime;
+public:
+	int getInaltime() {
+		return inaltime;
+	}
 };
 
 
@@ -35,10 +39,28 @@ void main() {
 	//student1.nume = "Gigel";
 	strcpy(student1.nume, "Gigel");
 
+	//student2.nrNote = 0;
+
 
 	cout << endl << "Studentul cu codul " << student1.cod
 		<< " are numele " << student1.nume;
 
 	cout << endl << "Studentul cu codul " << student2.cod
 		<< " are numele " << student2.nume;
+
+
+
+	ClasaStudent *ps = &student2;
+	ps += 62;
+	char* pps = (char*)&student2;
+	pps += 64;
+	*(int*)pps = (int)170;
+
+	cout << endl << "Dimensiune stud "
+		<< sizeof(student2);
+
+	cout << endl << " Inaltimea studentului este "
+	<< student2.getInaltime();
+
+
 }

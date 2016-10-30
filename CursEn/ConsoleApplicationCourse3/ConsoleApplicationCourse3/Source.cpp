@@ -55,4 +55,6 @@ void main() {
 	*(int*)(ps + 64) = (int)170;
 
 	cout << endl << "The height is " << stud2.getHeight();
+
+	cout << endl << "The size is " << sizeof(stud2);
 }
