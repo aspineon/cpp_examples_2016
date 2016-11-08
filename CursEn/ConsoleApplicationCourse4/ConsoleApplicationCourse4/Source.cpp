@@ -2,13 +2,15 @@
 using namespace std;
 
 class Student {
-public:
+private:
 	//attributes
 	int code;
 	char name[50];
 	int * grades;
 	int noGrades;
 	char* faculty;
+
+public:
 	//methods
 	//constructor
 	Student() {
@@ -36,24 +38,70 @@ public:
 
 	}
 
+	~Student() {
+		cout << endl << "Destructor !!!!!";
+		if (this->faculty != NULL)
+			delete [] this->faculty;
+	}
+
+
+	Student(Student& student) {
+		cout << endl << "Copy constructor";
+		this->code = student.code;
+		strcpy(this->name,student.name);
+		this->faculty = new char[strlen(student.faculty) + 1];
+		strcpy(this->faculty, student.faculty);
+	}
+
+public:
+	//accessor methods
+	//for reading
+	int getCode() {
+		return this->code;
+	}
+
+	char* getFaculty() {
+		return this->faculty;
+	}
+	char* getName() {
+		return this->name;
+	}
+
+	//write access
+	void setFaculty(char* newFaculty) {
+		//validating the input
+		if (strlen(newFaculty) >= 2) {
+
+			//this->faculty = newFaculty; DON'T
+			if (this->faculty != NULL)
+				delete [] this->faculty;
+			this->faculty = new char[strlen(newFaculty) + 1];
+			strcpy(this->faculty, newFaculty);
+		}
+		else{
+			throw exception("The name is too short!");
+		}
+
+	}
+
 };
 
 
-void initStudent(Student* s) {
-	s->code = 0;
-	s->noGrades = 0;
-	s->grades = NULL;
-	//s->name = "John Doe";
-	strcpy(s->name, "John Doe");
-}
+//void initStudent(Student* s) {
+//	s->code = 0;
+//	s->noGrades = 0;
+//	s->grades = NULL;
+//	//s->name = "John Doe";
+//	strcpy(s->name, "John Doe");
+//}
 
-void initStudent2(Student& s) {
-	s.code = 0;
-	s.noGrades = 0;
-	s.grades = NULL;
-	//s->name = "John Doe";
-	strcpy(s.name, "John Doe");
-}
+//void initStudent2(Student& s) {
+//	s.code = 0;
+//	s.noGrades = 0;
+//	s.grades = NULL;
+//	//s->name = "John Doe";
+//	strcpy(s.name, "John Doe");
+//}
 
 //overloading methods
 int sum(int a, int b) {
@@ -69,9 +117,9 @@ int sum(double a, int b) {
 
 void displayStudent(Student s) {
 	cout << endl << "The student name is "
-		<< s.name << ", the code is "
-		<< s.code << " and the faculty is "
-		<< s.faculty;
+		<< s.getName() << ", the code is "
+		<< s.getCode() << " and the faculty is "
+		<< s.getFaculty();
 
 }
 
@@ -80,14 +128,12 @@ void doesNothing() {
 }
 
 void main() {
-	Student student1;
+	//Student student1;
 	Student student2("Gigel",3,"MAN");
 	//initStudent(&student1);
 	//initStudent2(student1);
-	displayStudent(student1);
+	//displayStudent(student1);
 	displayStudent(student2);
-
-	for (;;) {
-		doesNothing();
-	}
+	student2.setFaculty("CSIE");
+	displayStudent(student2);
 }
